@@ -7,10 +7,10 @@ from rest_framework.renderers import JSONRenderer
 from school.models import Student
 
 
-class StudentSerializer(serializers.Serializer): # сериализатор для перевода данных во внутренний тип данных Python - словарь
-    firstname = serializers.CharField(max_length=255)
-    lastname = serializers.CharField(max_length=255)
-    group_id = serializers.IntegerField()
+class StudentSerializer(serializers.ModelSerializer): # сериализатор для перевода данных во внутренний тип данных Python - словарь
+    class Meta:
+        model = Student
+        fields = '__all__'
 
 
     def create(self, validated_data):
