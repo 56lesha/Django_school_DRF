@@ -1,11 +1,12 @@
 from django.forms import model_to_dict
 from django.shortcuts import render
 from rest_framework import generics, viewsets, mixins
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 
-from school.models import Student
+from school.models import Student, Group
 from school.serializers import StudentSerializer
 
 
@@ -19,6 +20,20 @@ class StudentViewSet(mixins.CreateModelMixin,
                    GenericViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
+    def get_queryset(self):
+        pk = self.kwargs.get("pk")
+        if not pk:
+            return Student.objects.all()[:3]
+        return Student.objects.filter(pk=pk)
+
+    @action(methods=['get'], detail=True)
+    def group(self, request, pk=None):
+        group = Group.objects.get(pk=pk)
+        return Response({"groups": group.name})
+
+
+
 
 
 #with generics

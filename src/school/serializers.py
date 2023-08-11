@@ -4,7 +4,7 @@ from rest_framework import serializers
 from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
 
-from school.models import Student
+from school.models import Student, Group
 
 
 class StudentSerializer(serializers.ModelSerializer): # сериализатор для перевода данных во внутренний тип данных Python - словарь
@@ -13,8 +13,15 @@ class StudentSerializer(serializers.ModelSerializer): # сериализатор
         fields = '__all__'
 
 
-    def create(self, validated_data):
-        return Student.objects.create(**validated_data)
+
+
+
+
+
+
+
+    # def create(self, validated_data):
+    #     return Student.objects.create(**validated_data)
 
     # Например, если `validated_data` имеет вид:
     # ```
@@ -27,12 +34,12 @@ class StudentSerializer(serializers.ModelSerializer): # сериализатор
     # То вызов метода `Student.objects.create(**validated_data)` будет эквивалентен
     # вызову: Student.objects.create(name='John', age=20, major='Computer Science')
 
-    def update(self, instance, validated_data):
-        instance.firstname = validated_data.get('firstname', instance.firstname)
-        instance.lastname = validated_data.get('lastname', instance.lastname)
-        instance.group_id = validated_data.get('group_id', instance.group_id)
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     instance.firstname = validated_data.get('firstname', instance.firstname)
+    #     instance.lastname = validated_data.get('lastname', instance.lastname)
+    #     instance.group_id = validated_data.get('group_id', instance.group_id)
+    #     instance.save()
+    #     return instance
 
 
 

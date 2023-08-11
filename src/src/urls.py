@@ -19,8 +19,9 @@ from django.urls import path, include
 
 from school.views import *
 from rest_framework import routers
-router = routers.SimpleRouter()
+router = routers.DefaultRouter()
 router.register(r"student", StudentViewSet)
+print(router.urls)
 
 
 urlpatterns = [
